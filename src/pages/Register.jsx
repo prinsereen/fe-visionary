@@ -33,7 +33,7 @@ const Register = () => {
 
 
         </div>
-        <img src={hero_register} className='w-[50%] h-[917px] object-cover'/>
+        <img src={hero_register} className='w-1/2 h-screen object-cover'/>
     </div>
   )
 }
