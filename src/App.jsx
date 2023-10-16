@@ -1,13 +1,11 @@
-
-
-import Register from './pages/Register'
+// import Register from './pages/Register'
+import Login from './pages/Login'
 
 function App() {
-
-
   return (
     <div className='flex h-screen w-screen'>
-      <Register/>
+      {/* <Register/> */}
+      { <Login/>}
     </div>
   )
 }
