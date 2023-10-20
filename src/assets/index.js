@@ -1,8 +1,12 @@
+// pages
 import Search from "./search.svg?react";
 import Home from "./home.svg?react";
 import Video from "./video-camera.svg?react";
 import Film from "./film.svg?react";
 import profilePhoto from "./Ellipse.png";
+import Social from "./social.svg?react";
+
+// movies
 import movie1 from "./movie1.png";
 import movie2 from "./movie2.png";
 import movie3 from "./movie3.png";
@@ -13,23 +17,35 @@ import movie7 from "./movie7.png";
 import movie8 from "./movie8.png";
 import movie9 from "./movie9.png";
 import movie10 from "./movie10.png";
+
+// movie detail
+import recalled from './Recalled (2021)  Official Trailer (Eng Sub)  Seo Ye Ji Kim Kang Woo.mp4'
+import recalled4 from './recalled4.png'
+import recalled5 from './recalled5.png'
+import recalled6 from './recalled6.png'
+
+// kseries
 import kseries1 from "./kseries1.png";
 import kseries2 from "./kseries2.png";
 import kseries3 from "./kseries3.png";
-import search from "./search.png";
+
+// films
 import film1 from "./film1.png";
 import film2 from "./film2.png";
 import film3 from "./film3.png";
 import film4 from "./film4.png";
 import film5 from "./film5.png";
 import film6 from "./film6.png";
+
+// icons
+import search from "./search.png";
 import tonton from './tonton.png'
 import plus from './plus.png'
 import back from './back.png'
-import recalled from './Recalled (2021)  Official Trailer (Eng Sub)  Seo Ye Ji Kim Kang Woo.mp4'
-import recalled4 from './recalled4.png'
-import recalled5 from './recalled5.png'
-import recalled6 from './recalled6.png'
+
+// accounts
+import account1 from "./img/accounts/account1.png";
+import account2 from "./img/accounts/account2.png";
 
 export {
   Search,
@@ -37,6 +53,7 @@ export {
   Video,
   Film,
   profilePhoto,
+  Social,
   movie1,
   movie2,
   movie3,
@@ -63,5 +80,7 @@ export {
   recalled,
   recalled4,
   recalled5,
-  recalled6
+  recalled6,
+  account1,
+  account2,
 };
