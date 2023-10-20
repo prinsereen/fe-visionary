@@ -3,7 +3,7 @@ import Login from "./pages/Login";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { Home, Film, Search, Video, VideoPlayed } from "./pages";
+import { Home, Film, Search, Video, VideoPlayed, Social, Profile} from "./pages";
 
 function App() {
   return (
@@ -16,6 +16,8 @@ function App() {
         <Route path="/film" element={<Film />} />
         <Route path="/video" element={<Video />} />
         <Route path="/videoPlayed" element={<VideoPlayed />} />
+        <Route path="/social" element={<Social />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );

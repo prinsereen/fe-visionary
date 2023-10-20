@@ -24,9 +24,8 @@ const Navbar = () => {
         }}
       >
         <Home
-          fill={`${
-            active === "home" || hover === "home" ? "#01798E" : "white"
-          }`}
+          fill={`${active === "home" || hover === "home" ? "#01798E" : "white"
+            }`}
           onMouseEnter={() => {
             setHover("home");
           }}
@@ -42,9 +41,8 @@ const Navbar = () => {
         }}
       >
         <Search
-          fill={`${
-            active === "search" || hover === "search" ? "#01798E" : "white"
-          }`}
+          fill={`${active === "search" || hover === "search" ? "#01798E" : "white"
+            }`}
           onMouseEnter={() => {
             setHover("search");
           }}
@@ -60,9 +58,8 @@ const Navbar = () => {
         }}
       >
         <Film
-          fill={`${
-            active === "film" || hover === "film" ? "#01798E" : "white"
-          }`}
+          fill={`${active === "film" || hover === "film" ? "#01798E" : "white"
+            }`}
           onMouseEnter={() => {
             setHover("film");
           }}
@@ -78,9 +75,8 @@ const Navbar = () => {
         }}
       >
         <Video
-          fill={`${
-            active === "video" || hover === "video" ? "#01798E" : "white"
-          }`}
+          fill={`${active === "video" || hover === "video" ? "#01798E" : "white"
+            }`}
           onMouseEnter={() => {
             setHover("video");
           }}
@@ -89,8 +85,30 @@ const Navbar = () => {
           }}
         />
       </Link>
-     
-      <img src={profilePhoto} />
+
+      {/* temporary hidden */}
+      {/* <Link
+        to="/social"
+        onClick={() => {
+          setActive("social");
+        }}
+      >
+        <Social
+          fill={`${active === "social" || hover === "social" ? "#01798E" : "white"
+            }`}
+          onMouseEnter={() => {
+            setHover("social");
+          }}
+          onMouseLeave={() => {
+            setHover("");
+          }}
+        />
+      </Link> */}
+
+      <Link to={"/profile"}>
+        <img src={profilePhoto} />
+      </Link>
+
     </div>
   );
 };
