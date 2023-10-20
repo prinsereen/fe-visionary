@@ -9,7 +9,7 @@ const Register = () => {
         <p className="text-white mb-14">
           Masukkan data yang sesuai yang telah anda daftarkan{" "}
         </p>
-        <form className="text-white flex flex-col w-[50%] gap-3 ">
+        <form className="text-black flex flex-col w-[50%] gap-3 ">
           <label>Username</label>
           <input
             type="text"
