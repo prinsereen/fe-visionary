@@ -11,10 +11,57 @@ import {
   film4,
   film5,
 } from "../assets";
-import ReactPlayer from "react-player";
 import { Link } from "react-router-dom";
 
+import VideoJS from '../components/VideoJS'
+import videojs from 'video.js';
+import { useRef } from "react";
+import Plyr from "plyr-react"
+import "plyr-react/plyr.css"
+
 const VideoPlayed = () => {
+  const playerRef = useRef(null);
+
+  // const plyrProps = {
+  //   source: recalled, // https://github.com/sampotts/plyr#the-source-setter
+  //   // https://github.com/sampotts/plyr#options
+  //   // Direct props for inner video tag (mdn.io/video)
+  // }
+
+  const videoJsOptions = {
+    autoplay: false,
+    controls: true,
+    responsive: true,
+    playbackRates: [0.5, 1, 1.5, 2],
+    fluid: true,
+    controlBar: {
+      skipButtons: {
+        forward: 10,
+        backward: 10,
+      }
+    },
+    
+    sources: [{
+      src: recalled,
+      type: 'video/mp4',
+    }],
+    
+  };
+
+  const handlePlayerReady = (player) => {
+    playerRef.current = player;
+
+    // You can handle player events here, for example:
+    player.on('waiting', () => {
+      videojs.log('player is waiting');
+    });
+
+    player.on('dispose', () => {
+      videojs.log('player will dispose');
+    });
+  };
+
+
   return (
     <div className="w-full h-full flex bg-black overflow-x-hidden ">
       <Navbar />
@@ -26,7 +73,8 @@ const VideoPlayed = () => {
           <img src={back} alt="" />
           <h1 className="text-[20px]">Kembali</h1>
         </Link>
-        <ReactPlayer url={recalled} controls width={1122} height={561} />
+        <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
+        {/* <Plyr source={recalled} /> */}
         <h1 className="font-bold text-[64px]">Recalled</h1>
         <div className="flex items-center gap-2">
           <div className="rounded-full bg-white w-2 h-2" />
