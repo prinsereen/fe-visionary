@@ -93,6 +93,9 @@ export default {
       // => @media (min-width: 1280px) { ... }
     },
   },
-  plugins: [],
+  plugins: [
+    // eslint-disable-next-line no-undef
+    require('tailwind-scrollbar-hide'),
+  ],
 }
 

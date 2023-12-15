@@ -16,7 +16,6 @@ export const VideoJS = (props) => {
     if (!playerRef.current) {
       // The Video.js player needs to be _inside_ the component el for React 18 Strict Mode. 
       const videoElement = document.createElement("video-js");
-
       videoElement.classList.add('vjs-big-play-centered');
       videoRef.current.appendChild(videoElement);
 
@@ -25,11 +24,14 @@ export const VideoJS = (props) => {
         onReady && onReady(player);
       });
 
+      
+      
+
     // You could update an existing player in the `else` block here
     // on prop change, for example:
     } else {
       const player = playerRef.current;
-
+      // player.muted(true)
       player.autoplay(options.autoplay);
       player.src(options.sources);
     }

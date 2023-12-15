@@ -1,8 +1,5 @@
 // pages
-import Search from "./search.svg?react";
-import Home from "./home.svg?react";
-import Video from "./video-camera.svg?react";
-import Film from "./film.svg?react";
+
 import profilePhoto from "./Ellipse.png";
 import Social from "./social.svg?react";
 
@@ -40,7 +37,6 @@ import film6 from "./film6.png";
 // icons
 import search from "./search.png";
 import tonton from './tonton.png'
-import plus from './plus.png'
 import back from './back.png'
 
 // accounts
@@ -48,10 +44,7 @@ import account1 from "./img/accounts/account1.png";
 import account2 from "./img/accounts/account2.png";
 
 export {
-  Search,
-  Home,
-  Video,
-  Film,
+
   profilePhoto,
   Social,
   movie1,
@@ -75,7 +68,6 @@ export {
   film5,
   film6,
   tonton,
-  plus,
   back,
   recalled,
   recalled4,

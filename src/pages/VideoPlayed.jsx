@@ -1,23 +1,15 @@
 import Navbar from "../components/Navbar";
-import {
-  back,
-  recalled4,
-  recalled5,
-  recalled6,
-  recalled,
-  film2,
-  film6,
-  film3,
-  film4,
-  film5,
-} from "../assets";
+import { recalled4, recalled5, recalled6, recalled } from "../assets";
 import { Link } from "react-router-dom";
 
-import VideoJS from '../components/VideoJS'
-import videojs from 'video.js';
+import VideoJS from "../components/VideoJS";
+import videojs from "video.js";
 import { useRef } from "react";
-import Plyr from "plyr-react"
-import "plyr-react/plyr.css"
+// import Plyr from "plyr-react"
+import "plyr-react/plyr.css";
+import ScrollableCard from "../components/ScrollableCard";
+import { Dot } from "lucide-react";
+// import { off } from "video.js/dist/types/utils/events";
 
 const VideoPlayed = () => {
   const playerRef = useRef(null);
@@ -29,8 +21,8 @@ const VideoPlayed = () => {
   // }
 
   const videoJsOptions = {
-    autoplay: false,
     controls: true,
+    percentAsDecimal: 0.1,
     responsive: true,
     playbackRates: [0.5, 1, 1.5, 2],
     fluid: true,
@@ -38,62 +30,61 @@ const VideoPlayed = () => {
       skipButtons: {
         forward: 10,
         backward: 10,
-      }
+      },
     },
-    
-    sources: [{
-      src: recalled,
-      type: 'video/mp4',
-    }],
-    
+
+    sources: [
+      {
+        src: recalled,
+        type: "video/mp4",
+      },
+    ],
   };
 
   const handlePlayerReady = (player) => {
     playerRef.current = player;
 
     // You can handle player events here, for example:
-    player.on('waiting', () => {
-      videojs.log('player is waiting');
+    player.on("waiting", () => {
+      videojs.log("player is waiting");
     });
 
-    player.on('dispose', () => {
-      videojs.log('player will dispose');
+    player.on("dispose", () => {
+      videojs.log("player will dispose");
     });
   };
 
-
   return (
-    <div className="w-full h-full flex bg-black overflow-x-hidden ">
+    <div className="w-full h-full flex overflow-x-hidden ">
       <Navbar />
-      <div className="bg-black w-[100vw] text-white p-12 pl-64 gap-1 flex flex-col">
-        <Link
-          to="/home"
-          className="flex gap-3 items-center cursor-pointer mb-10 "
-        >
-          <img src={back} alt="" />
-          <h1 className="text-[20px]">Kembali</h1>
-        </Link>
+      <div className="w-[100vw] text-white pr-0 pl-32 gap-1 flex flex-col ">
         <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
-        {/* <Plyr source={recalled} /> */}
-        <h1 className="font-bold text-[64px]">Recalled</h1>
-        <div className="flex items-center gap-2">
-          <div className="rounded-full bg-white w-2 h-2" />
-          <h1 className="text-[24px]">Episode 3</h1>
-        </div>
-        <div className="mt-10">
-          <h1 className="font-bold text-[32px] mb-4">Sipnosis</h1>
-          <p className="text-[20px]">
+        {/* <VideoPlayer options={videoJsOptions} onReady={handlePlayerReady} /> */}
+
+        <div className="w-full">
+          <h1 className="font-bold text-[64px]">Recalled</h1>
+
+          <div className="flex w-full items-center mb-2">
+            <h1 className="text-16 font-semibold ">2023</h1>
+            <Dot />
+            <h1 className="text-16 w-14 font-semibold ">2h 43m</h1>
+            <Dot />
+            <h1 className="text-16 font-semibold ">English</h1>
+            <Dot />
+            <h1 className="text-16 font-semibold ">13+</h1>
+            <Dot />
+            <h1 className="text-16 font-semibold ">Action </h1>
+          </div>
+
+          <p className="text-16 w-[30%]">
             Lorem ipsum dolor sit amet consectetur. A metus in quam quam nunc.
             Netus volutpat arcu urna convallis. Tristique dignissim elementum in
-            non vitae amet ipsum lectus maecenas. Sed consectetur habitant eget
-            nisi at. Duis nec consectetur lobortis vitae. Dolor id pulvinar
-            nascetur nunc. Scelerisque non quam ultrices molestie. Est risus
-            suspendisse vel quam tellus morbi sit consectetur magnis. Elit
-            habitant egestas tincidunt risus.
+            non vitae amet ipsum lectus maecenas.
           </p>
         </div>
+
         <div className="mt-10">
-          <h1 className="font-bold text-[32px] mb-4">Episode Selanjutnya</h1>
+          <h1 className="font-bold text-[32px] mb-4">Episode</h1>
           <div className="flex gap-5">
             <div>
               <img src={recalled4} alt="" />
@@ -123,18 +114,12 @@ const VideoPlayed = () => {
         </div>
         <div className="mt-10">
           <div className="flex justify-between">
-            <h1 className="font-bold text-[32px] mb-4">
-              Serial Populer Lainnya
-            </h1>
-            <h1 className="text-[20px] mb-4 cursor-pointer ">lihat lainnya</h1>
+            <h1 className="font-bold text-[32px] ">Serial Populer Lainnya</h1>
+            <Link to="/video" className="text-[20px]  cursor-pointer px-3">
+              lihat lainnya
+            </Link>
           </div>
-          <div className="flex gap-5">
-            <img src={film2} alt="" />
-            <img src={film3} alt="" />
-            <img src={film4} alt="" />
-            <img src={film5} alt="" />
-            <img src={film6} alt="" />
-          </div>
+          <ScrollableCard />
         </div>
       </div>
     </div>

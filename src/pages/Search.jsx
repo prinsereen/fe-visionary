@@ -13,20 +13,20 @@ import {
 
 const Search = () => {
   return (
-    <div className="w-full h-full flex bg-black">
+    <div className="w-full h-full flex just ">
       <Navbar />
-      <div className="bg-black w-full h-full text-white p-12 pl-40 gap-16 flex flex-col items-center">
-        <div className="flex ">
+      <div className=" w-full h-full text-white p-12 pl-24  gap-16 flex flex-col items-center">
+        <div className="flex relative ">
           <input
             className="rounded-[50px] bg-[#D9D9D9]  text-black text-[20px] placeholder-[#939FB1] py-3 px-10 pl-24 w-[700px]"
             placeholder="Cari Film, Series, atau lainnya"
           />
           <img
             src={search}
-            className="absolute left-1/2 -translate-x-64 mt-2 cursor-pointer"
+            className="absolute left-5 mt-2 cursor-pointer"
           />
         </div>
-        <div className="flex flex-wrap justify-center gap-8 w-[80%] ">
+        <div className="grid grid-cols-4 desktop:grid-cols-5 gap-8 w-[80%] ">
           <img src={movie3} />
           <img src={movie4} />
           <img src={movie5} />

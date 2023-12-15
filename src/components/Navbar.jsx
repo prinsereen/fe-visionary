@@ -1,10 +1,11 @@
-import { Search, Home, Video, Film, profilePhoto } from "../assets";
+import { profilePhoto } from "../assets";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { Home, Search, Film, Video } from "lucide-react";
 
 const Navbar = () => {
   const [active, setActive] = useState("");
-  const [hover, setHover] = useState("");
+  const [isHovered, setIsHovered] = useState(false);
 
   // Get the currentPath (ex. home, video, film)
   const location = useLocation();
@@ -16,99 +17,131 @@ const Navbar = () => {
   }, [firstPath]);
 
   return (
-    <div className="w-40 h-[100vh] fixed bg-black flex flex-col justify-center items-center gap-10">
-      <Link
-        to="/home"
-        onClick={() => {
-          setActive("home");
-        }}
+    <div
+      className={`w-28 h-full fixed bg-black bg-transparent flex px-5 flex-col justify-center items-start gap-10 z-20 ${isHovered ? "hover:bg-gradient-to-r from-black hover:bg-opacity-50 hover:w-[400px]" : "" } `}
+    >
+      <div
+        className="w-28 h-[40%] fixed bg-black bg-transparent flex px-5 flex-col justify-center items-start gap-10 z-20 "
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
-        <Home
-          fill={`${active === "home" || hover === "home" ? "#01798E" : "white"
-            }`}
-          onMouseEnter={() => {
-            setHover("home");
+        <Link
+          to="/home"
+          onClick={() => {
+            setActive("home");
+            setIsHovered(false);
+            setTimeout(() => {
+              setIsHovered(true);
+            }, 1000);
           }}
-          onMouseLeave={() => {
-            setHover("");
+          className="flex  gap-5 font-bold  hover:translate-x-1"
+        >
+          <Home
+            className={`${
+              active === "home" ? "text-[#01798E] font-bold" : "bg-transparent"
+            } hover:text-[#01798E] `}
+          />
+          <h1
+            className={`text-20 text-gray hover:text-white ${
+              isHovered ? "opacity-100" : "opacity-0"
+            } transition ease-in-out  `}
+          >
+            Home
+          </h1>
+        </Link>
+        <Link
+          to="/search"
+          onClick={() => {
+            setActive("search");
+            setIsHovered(false);
+            setTimeout(() => {
+              setIsHovered(true);
+            }, 1000);
           }}
-        />
-      </Link>
-      <Link
-        to="/search"
-        onClick={() => {
-          setActive("search");
-        }}
-      >
-        <Search
-          fill={`${active === "search" || hover === "search" ? "#01798E" : "white"
-            }`}
-          onMouseEnter={() => {
-            setHover("search");
+          className="flex gap-5 font-bold hover:translate-x-1 "
+        >
+          <Search
+            className={`${
+              active === "search" ? "text-[#01798E]" : "bg-transparent"
+            } hover:text-[#01798E]`}
+          />
+          <h1
+            className={`text-20 text-gray hover:text-white ${
+              isHovered ? "opacity-100" : "opacity-0"
+            } transition ease-in-out`}
+          >
+            Search
+          </h1>
+        </Link>
+        <Link
+          to="/film"
+          onClick={() => {
+            setActive("film");
+            setIsHovered(false);
+            setTimeout(() => {
+              setIsHovered(true);
+            }, 1000);
           }}
-          onMouseLeave={() => {
-            setHover("");
+          className="flex gap-5 font-bold hover:translate-x-1"
+        >
+          <Film
+            className={`${
+              active === "film" ? "text-[#01798E]" : "bg-transparent"
+            } hover:text-[#01798E]`}
+          />
+          <h1
+            className={`text-20 text-gray hover:text-white ${
+              isHovered ? "opacity-100" : "opacity-0"
+            } transition ease-in-out`}
+          >
+            Movies
+          </h1>
+        </Link>
+        <Link
+          to="/video"
+          onClick={() => {
+            setActive("video");
+            setIsHovered(false);
+            setTimeout(() => {
+              setIsHovered(true);
+            }, 1000);
           }}
-        />
-      </Link>
-      <Link
-        to="/film"
-        onClick={() => {
-          setActive("film");
-        }}
-      >
-        <Film
-          fill={`${active === "film" || hover === "film" ? "#01798E" : "white"
-            }`}
-          onMouseEnter={() => {
-            setHover("film");
-          }}
-          onMouseLeave={() => {
-            setHover("");
-          }}
-        />
-      </Link>
-      <Link
-        to="/video"
-        onClick={() => {
-          setActive("video");
-        }}
-      >
-        <Video
-          fill={`${active === "video" || hover === "video" ? "#01798E" : "white"
-            }`}
-          onMouseEnter={() => {
-            setHover("video");
-          }}
-          onMouseLeave={() => {
-            setHover("");
-          }}
-        />
-      </Link>
+          className="flex gap-5 hover:translate-x-1 font-bold"
+        >
+          <Video
+            className={`${
+              active === "video" ? "text-[#01798E]" : "bg-transparent"
+            } hover:text-[#01798E]`}
+          />
+          <h1
+            className={`text-20 text-gray hover:text-white  ${
+              isHovered ? "opacity-100" : "opacity-0"
+            } transition ease-in-out`}
+          >
+            Series
+          </h1>
+        </Link>
 
-      {/* temporary hidden */}
-      {/* <Link
-        to="/social"
-        onClick={() => {
-          setActive("social");
-        }}
-      >
-        <Social
-          fill={`${active === "social" || hover === "social" ? "#01798E" : "white"
-            }`}
-          onMouseEnter={() => {
-            setHover("social");
+        <Link
+          to={"/profile"}
+          className="flex gap-5 font-bold hover:translate-x-1"
+          onClick={() => {
+            setIsHovered(false);
+            setTimeout(() => {
+              setIsHovered(true);
+            }, 1000);
           }}
-          onMouseLeave={() => {
-            setHover("");
-          }}
-        />
-      </Link> */}
-
-      <Link to={"/profile"}>
-        <img src={profilePhoto} />
-      </Link>
-
+        >
+          <img src={profilePhoto} className="h-7 w-7" />
+          <h1
+            className={`text-20 text-gray hover:text-white ${
+              isHovered ? "opacity-100" : "opacity-0"
+            } transition ease-in-out`}
+          >
+            Profile
+          </h1>
+        </Link>
+      </div>
     </div>
   );
 };

@@ -17,7 +17,7 @@
 // The color of icons, text, and the big play button border.
 // Try changing to #0f0
 $primary-foreground-color: #cacaca; // #fff default
-$secondary-foreground-color: #b7090b;
+$secondary-foreground-color: #01798E;
 // The default color of control backgrounds is mostly black but with a little
 // bit of blue so it can still be seen on all-black video frames, which are common.
 // Try changing to #900
@@ -30,6 +30,7 @@ $controls-margin: 1em;
 // for the slider background.
 $slider-bg-color: lighten($primary-background-color, 3%);
 $progress-position: -2.5em;
+
 @font-face {
   font-family: nf-icon;
   src: url(https://assets.nflxext.com/ffe/siteui/fonts/nf-icon-v1-86.eot);
@@ -87,8 +88,8 @@ $progress-position: -2.5em;
     /* Align center */
     left: 50%;
     top: 40%;
-    margin-left: -($big-play-width / 2);
-    margin-top: -($big-play-height / 2);
+    margin-left:calc($big-play-width / 2);
+    margin-top: calc($big-play-width / 2);
   } @else {
     /* Align top left. 0.5em = 15px default */
     left: 0.5em;
@@ -227,7 +228,7 @@ $progress-position: -2.5em;
     content: "";
     top: -0.2em;
     border: 0;
-    background: radial-gradient(#b7090b 33%, #830607);
+    background: radial-gradient(#01798E 33%, #830607);
     width: 1em;
     height: 1em;
     border-radius: 50%;
