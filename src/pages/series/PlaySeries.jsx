@@ -154,7 +154,7 @@ const PlaySeries = () => {
               <Dot />
               <h1 className="text-16 font-semibold ">{data.genres[0].name}</h1>
             </div>
-            <p className="text-16 w-[30%] mb-3 text-[#A1A2A2]">
+            <p className="text-16 w-[40%] mb-3 text-[#A1A2A2]">
               {data.overview}
             </p>
           </div>
