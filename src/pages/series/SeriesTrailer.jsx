@@ -101,14 +101,14 @@ const SeriesTrailer = () => {
   );
 
   const certificationInfo =
-  data &&
-  data.release_dates &&
-  data.release_dates[0] &&
-  data.release_dates[0].rating &&
-  findCertification(
-    data.release_dates[0].iso_3166_1,
-    data.release_dates[0].rating
-  );
+    data &&
+    data.release_dates &&
+    data.release_dates[0] &&
+    data.release_dates[0].rating &&
+    findCertification(
+      data.release_dates[0].iso_3166_1,
+      data.release_dates[0].rating
+    );
 
   const overview = limitWords(data.overview, 102);
 
@@ -173,9 +173,9 @@ const SeriesTrailer = () => {
               <h1 className="text-16 font-semibold ">{formattedDate}</h1>
               <Dot />
               <h1 className="text-16  font-semibold ">
-                {data.episode_run_time[0]
-                  ? data.episode_run_time[0]
-                  : data.last_episode_to_air.runtime}{" "}
+                {data.episode_run_time[0] ||
+                  data.last_episode_to_air?.runtime ||
+                  0}{" "}
                 m
               </h1>
               <Dot />
