@@ -70,18 +70,18 @@ const EpisodeDetail = ({ id, season, episode }) => {
       {data.still_path ? (
         <img
           src={IMAGE_BASE_URL + data.still_path}
-          alt={`${specials ? "Specials" : `S${season}`} E${episode}`}
+          alt={`${specials ? "Special" : `S${season}`} E${episode}`}
           className="w-[20%]  rounded-md text-center "
         />
       ) : (
         <div className=" w-[20%] h-[120px] border-[1px] flex items-center justify-center ">
-          {`${specials ? "Specials" : `S${season}`} E${episode}`}
+          {`${specials ? "Special" : `S${season}`} E${episode}`}
         </div>
       )}
       <div className="flex flex-col justify-center cursor-pointer">
         <h1></h1>
         <div className="flex font-semibold">
-          <h1>{`${specials ? "Specials" : `S${season}`} E${episode}`}</h1>
+          <h1>{`${specials ? "Special" : `S${season}`} E${episode}`}</h1>
           <Dot />
           <h1>{formattedDate}</h1>
           <Dot />
