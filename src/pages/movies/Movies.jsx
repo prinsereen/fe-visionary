@@ -17,7 +17,7 @@ const Movies = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/trending/series`,
+          `http://localhost:5000/trending/movie`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

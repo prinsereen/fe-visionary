@@ -19,7 +19,7 @@ const EditProfile = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        // console.log(response.data.profiles[0]);
+        console.log(response.data.profiles);
         setData(response.data.profiles);
       } catch (error) {
         console.log(error);
@@ -57,7 +57,7 @@ const EditProfile = () => {
   return (
     <div className="flex flex-col justify-center items-center w-full h-[100vh] px-10">
        <div className="flex w-full absolute top-10 right-10 justify-end">
-        <Link to="/home" className="text-primary text-20">cancel</Link>
+        <Link to={`${data[0] ? "/home" : "/editProfile"}`} className="text-primary text-20">cancel</Link>
       </div>
       <h1 className="font-bold text-40 mb-20">Pilih Profile</h1>
       <div className="flex gap-10 mb-14">

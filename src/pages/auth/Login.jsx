@@ -6,11 +6,13 @@ import hero_register from "../../assets/hero_register.png";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../../state";
+import { Loader2 } from "lucide-react";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,6 +20,7 @@ const Login = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const data = {
         email,
         password,
@@ -38,6 +41,8 @@ const Login = () => {
       navigate("/editProfile");
     } catch (error) {
       setLoginError(error.response.data.msg);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -72,9 +77,9 @@ const Login = () => {
           <button
             type="submit"
             value="submit"
-            className="bg-[#316A8E] mt-10 rounded-[8px] h-[50px]"
+            className="bg-[#316A8E] mt-10 rounded-[8px] h-[50px] flex justify-center items-center"
           >
-            Masuk
+            {loading ? <Loader2 className="animate-spin" /> : <h1>Masuk</h1>}
           </button>
           <div className="flex justify-start items-start mt-2 mb-8">
             <div className="text-white text ">

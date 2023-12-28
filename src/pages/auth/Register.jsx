@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 import hero_register from "../../assets/hero_register.png";
-import { Eye } from "lucide-react";
+import { Eye, Loader2 } from "lucide-react";
 import { EyeOff } from "lucide-react";
 
 const Register = () => {
@@ -17,6 +17,7 @@ const Register = () => {
   const [passwordError, setPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfPassword, setShowConfPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handlePasswordChange = (e) => {
     const newPassword = e.target.value;
@@ -55,12 +56,13 @@ const Register = () => {
 
     // If validation passes, you can proceed with your form submission logic
     try {
+      setLoading(true);
       const updatedData = {
         email: email,
         password: password,
         conf_password: confirmPassword,
       };
-      console.log(updatedData);
+      // console.log(updatedData);
       const response = await axios.post(
         "http://localhost:5000/register",
         updatedData,
@@ -77,6 +79,8 @@ const Register = () => {
     } catch (error) {
       console.error(error);
       // Handle error scenarios
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -158,9 +162,9 @@ const Register = () => {
           <button
             type="submit"
             value="submit"
-            className="bg-[#316A8E] mt-10 rounded-[8px] h-[50px]"
+            className="bg-[#316A8E] mt-10 rounded-[8px] h-[50px] flex items-center justify-center"
           >
-            Daftar
+            {loading ? <Loader2 className="animate-spin" /> : <h1>Daftar</h1>}
           </button>
         </form>
         <div className="flex justify-start items-start mt-2 w-[50%]">

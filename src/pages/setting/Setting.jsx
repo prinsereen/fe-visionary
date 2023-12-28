@@ -11,6 +11,7 @@ import Parental from "./Parental";
 
 const Setting = () => {
   const [active, setActive] = useState(1);
+  
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

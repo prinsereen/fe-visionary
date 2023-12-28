@@ -17,7 +17,7 @@ const Series = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/trending/movie`,
+          `http://localhost:5000/trending/series`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

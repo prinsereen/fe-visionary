@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Plus, PlayCircle, Dot, Loader2 } from "lucide-react";
+import { Plus, PlayCircle, Dot, Loader2, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import { movieGenre, seriesGenre } from "../utils/genreList";
 import getEnglishNameByCode from "../utils/languages";
@@ -15,6 +15,7 @@ const CardDetail = ({ movie, index, length, name }) => {
   const seriesReleaseYear = new Date(movie.first_air_date).getUTCFullYear();
   const [loading, setLoading] = useState(false);
   const token = useSelector((state) => state.token);
+  const isWatchList = name === "list";
   let newName = name;
 
   if (name === "list") {
@@ -62,6 +63,32 @@ const CardDetail = ({ movie, index, length, name }) => {
     }
   };
 
+  const handleDeleteItem = async () => {
+    const type = newName === "movie" ? "movie" : "tv";
+    const data = {
+      items: [{ media_type: type, media_id: movie.id }],
+    };
+    console.log(data);
+    try {
+      setLoading(true);
+      const response = await axios.post(
+        "http://localhost:5000/delete/item",
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response);
+      window.location.reload(true);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const truncatedText = limitWords(movie.overview, 45);
 
   return (
@@ -91,6 +118,8 @@ const CardDetail = ({ movie, index, length, name }) => {
           <div className="bg-[#01798E] rounded-lg w-8 h-8 flex px-2 items-center justify-center cursor-pointer hover:opacity-80 ">
             {loading ? (
               <Loader2 className="animate-spin" />
+            ) : isWatchList ? (
+              <Check onClick={handleDeleteItem} />
             ) : (
               <Plus className="h-5 w-5" onClick={handleAddToWatchList} />
             )}

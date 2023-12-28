@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import ScrollableCard from "../../components/ScrollableCard";
 import getEnglishNameByCode from "../../utils/languages";
+// import findCertification from "../../utils/certifcation";
 
 const MovieTrailer = () => {
   const [data, setData] = useState(null);
@@ -19,10 +20,31 @@ const MovieTrailer = () => {
   const [loadingList, setLoadingList] = useState(false); // Added loading state
 
   // eslint-disable-next-line no-unused-vars
-  const [subscribed, setSubscribed] = useState(true);
+  const [isSubscribed, setIsSubscribed] = useState(false);
 
   const { id } = useParams();
   const token = useSelector((state) => state.token);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/me", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        // console.log(response.data.result.user.jenis_pengguna === "subscribed");
+        if (response.data.result.user.jenis_pengguna === "subscribed") {
+          setIsSubscribed(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    // Call the fetchData function when the component mounts
+    fetchData();
+  }, [token]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -117,6 +139,16 @@ const MovieTrailer = () => {
     }
   };
 
+  // const certificationInfo =
+  //   data &&
+  //   data.release_dates &&
+  //   data.release_dates[0] &&
+  //   data.release_dates[0].certification &&
+  //   findCertification(
+  //     data.release_dates.iso_3166_1,
+  //     data.release_dates.release_dates[0]?.certification
+  //   );
+
   return (
     <div className="w-full h-full flex overflow-x-auto scrollbar-hide">
       <Navbar />
@@ -160,9 +192,10 @@ const MovieTrailer = () => {
               <h1 className="text-16 font-semibold ">{language}</h1>
               <Dot />
               <h1 className="text-16 font-semibold ">
-                {data.release_dates &&
+                {(data.release_dates &&
                   data.release_dates.release_dates &&
-                  data.release_dates.release_dates[0]?.certification}
+                  data.release_dates.release_dates[0]?.certification) ||
+                  "N/A"}
               </h1>
               <Dot />
               <h1 className="text-16 font-semibold ">{data.genres[0].name}</h1>
@@ -175,7 +208,7 @@ const MovieTrailer = () => {
             <div className="flex justify-between items-center gap-4 py-3">
               <div className="flex gap-5 py-3">
                 <Link
-                  to={`${subscribed ? `/movie/play/${id}` : "/paywall"} `}
+                  to={`${isSubscribed ? `/movie/play/${id}` : "/paywall"} `}
                   className="flex items-center bg-opacity-50 gap-3 justify-center bg-[#01798E] w-80 h-12 px-5 text-white rounded-lg hover:opacity-80 hover:scale-105  transition-all ease-in "
                 >
                   <Play className="h-4 w-4 " />

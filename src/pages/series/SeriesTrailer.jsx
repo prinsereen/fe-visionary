@@ -1,31 +1,49 @@
 import Navbar from "../../components/Navbar";
-import { Link, useParams } from "react-router-dom";
-
-import { useEffect, useState } from "react";
-import "plyr-react/plyr.css";
-import { Dot, Loader2, Play, Plus, Volume2, VolumeX } from "lucide-react";
-import ReactPlayer from "react-player/youtube";
-import { useSelector } from "react-redux";
 import axios from "axios";
-import ScrollableCard from "../../components/ScrollableCard";
-import { recalled4, recalled5, recalled6 } from "../../assets";
-import getEnglishNameByCode from "../../utils/languages";
+
+import "plyr-react/plyr.css";
+import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { Dot, Loader2, Play, Plus, Volume2, VolumeX } from "lucide-react";
 import { limitWords } from "../../utils/limitWords";
+import ReactPlayer from "react-player/youtube";
+import getEnglishNameByCode from "../../utils/languages";
 import findCertification from "../../utils/certifcation";
+import ScrollableCard from "../../components/ScrollableCard";
 
 const SeriesTrailer = () => {
   const [data, setData] = useState(null);
+  const [isSubscribed, setIsSubscribed] = useState(false);
   const [muted, setMuted] = useState(true);
   const [trailer, setTrailer] = useState(null);
   const [moreMovie, setMoreMovie] = useState(null);
   const [loading, setLoading] = useState(true); // Added loading state
   const [loadingList, setLoadingList] = useState(false); // Added loading state
 
-  // eslint-disable-next-line no-unused-vars
-  const [subscribed, setSubscribed] = useState(true);
-
   const { id } = useParams();
   const token = useSelector((state) => state.token);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/me", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        // console.log(response.data.result.user.jenis_pengguna === "subscribed");
+        if (response.data.result.user.jenis_pengguna === "subscribed") {
+          setIsSubscribed(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    // Call the fetchData function when the component mounts
+    fetchData();
+  }, [token]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,7 +80,7 @@ const SeriesTrailer = () => {
           },
         });
         setData(response.data);
-        console.log(response.data);
+        // console.log(response.data);
         if (response.data.videos.results) {
           const trailerVideos = await response.data.videos.results.filter(
             (video) => video.type === "Trailer"
@@ -200,7 +218,7 @@ const SeriesTrailer = () => {
             <div className="flex justify-between items-center gap-4 py-3">
               <div className="flex gap-5 py-3">
                 <Link
-                  to={`${subscribed ? `/series/play/${id}` : "/paywall"} `}
+                  to={`${isSubscribed ? `/series/play/${id}` : "/paywall"} `}
                   className="flex items-center bg-opacity-50 gap-3 justify-center bg-[#01798E] w-80 h-12 px-5 text-white rounded-lg hover:opacity-80 hover:scale-105  transition-all ease-in "
                 >
                   <Play className="h-4 w-4 " />
@@ -228,35 +246,6 @@ const SeriesTrailer = () => {
                   className="cursor-pointer"
                 />
               )}
-            </div>
-          </div>
-        </div>
-        <div className="mb-10 pl-32">
-          <h1 className="font-bold text-[32px] mb-4">Episode</h1>
-          <div className="flex gap-5">
-            <div>
-              <img src={recalled4} alt="" />
-              <div className="flex items-center gap-5">
-                <h1 className="text-[24px]">Recalled</h1>
-                <div className="rounded-full bg-white w-2 h-2" />
-                <h1 className="text-[24px]">Episode 1</h1>
-              </div>
-            </div>
-            <div>
-              <img src={recalled5} alt="" />
-              <div className="flex items-center gap-5">
-                <h1 className="text-[24px]">Recalled</h1>
-                <div className="rounded-full bg-white w-2 h-2" />
-                <h1 className="text-[24px]">Episode 2</h1>
-              </div>
-            </div>
-            <div>
-              <img src={recalled6} alt="" />
-              <div className="flex items-center gap-5">
-                <h1 className="text-[24px]">Recalled</h1>
-                <div className="rounded-full bg-white w-2 h-2" />
-                <h1 className="text-[24px]">Episode 3</h1>
-              </div>
             </div>
           </div>
         </div>

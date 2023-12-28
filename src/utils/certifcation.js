@@ -1315,12 +1315,12 @@ const certificationCode = "PG";
 
 const certificationInfo = findCertification(country, certificationCode);
 
-if (certificationInfo) {
-  console.log(`Certification: ${certificationInfo.certification}`);
-  console.log(`Meaning: ${certificationInfo.meaning}`);
-  console.log(`Order: ${certificationInfo.order}`);
-} else {
-  console.log("Certification not found");
-}
+// if (certificationInfo) {
+//   console.log(`Certification: ${certificationInfo.certification}`);
+//   console.log(`Meaning: ${certificationInfo.meaning}`);
+//   console.log(`Order: ${certificationInfo.order}`);
+// } else {
+//   console.log("Certification not found");
+// }
 
 export default findCertification;

@@ -40,7 +40,7 @@ const ScrollableCard = ({ movies, name }) => {
         className="flex gap-3 overflow-x-auto scrollbar-hide w-full scroll-smooth py-12 pr-10 overflow-y-hidden"
         ref={elementRef}
       >
-        {filteredMovies.map((movie, index) => (
+        {filteredMovies && filteredMovies.map((movie, index) => (
           <div
             key={index}
             className="relative min-h-[366px] min-w-[244px] hover:z-10 "
