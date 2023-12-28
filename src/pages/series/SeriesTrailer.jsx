@@ -183,7 +183,7 @@ const SeriesTrailer = () => {
               <Dot />
               <div className="group flex justify-center">
                 {certificationInfo && (
-                  <span className="absolute top-0 bg-slate-600 w-[20%] scale-0 rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100">
+                  <span className="absolute -top-3 bg-slate-600 w-[20%] scale-0 rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100">
                     {certificationInfo.meaning}
                   </span>
                 )}

@@ -28,10 +28,7 @@ const Series = () => {
           const filterData = response.data.results.filter(
             (movie) => movie.poster_path !== null
           );
-          const filterBackdrop = filterData.filter(
-            (movie) => movie.backdrop_path !== null
-          );
-          setFirstDataId(filterBackdrop[2].id);
+          setFirstDataId(filterData[0].id);
           // console.log(filterBackdrop[0])
           setData(filterData);
         }

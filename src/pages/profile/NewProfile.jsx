@@ -271,7 +271,7 @@ const NewProfile = () => {
         )}
       </div>
       <button
-        className="w-[20%] py-4 bg-primary rounded-xl mt-10 font-bold"
+        className="w-[20%] py-4 text-center flex justify-center items-center bg-primary rounded-xl mt-10 font-bold"
         onClick={handleProfileSubmit}
       >
         {loading ? (

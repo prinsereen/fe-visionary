@@ -17,12 +17,12 @@ const SeriesHeader = ({ id }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/movie/${id}`, {
+        const response = await axios.get(`http://localhost:5000/series/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        // console.log(response.data);
+        console.log(response.data);
         setFirstData(response.data);
       } catch (error) {
         console.log(error);
@@ -37,7 +37,7 @@ const SeriesHeader = ({ id }) => {
     return null;
   }
 
-  const formattedDate = new Date(firstData.release_date).toLocaleDateString(
+  const formattedDate = new Date(firstData.first_air_date).toLocaleDateString(
     "en-US",
     {
       month: "long",
@@ -75,12 +75,14 @@ const SeriesHeader = ({ id }) => {
       />
       <div className="flex flex-col justify-center w-full">
         <h1 className="font-bold text-36 max-w-[70%] mb-2">
-          {firstData.title}
+          {firstData.name}
         </h1>
         <div className="flex w-full items-center  mb-2">
           <h1 className="text-16 font-semibold ">{formattedDate}</h1>
           <Dot />
-          <h1 className="text-16 font-semibold ">{firstData.runtime}m</h1>
+          <h1 className="text-16 font-semibold ">{firstData.episode_run_time[0]
+                  ? firstData.episode_run_time[0]
+                  : firstData.last_episode_to_air.runtime}{" "}m</h1>
           <Dot />
           <h1 className="text-16 font-semibold ">
             {firstData.spoken_languages &&
@@ -96,7 +98,7 @@ const SeriesHeader = ({ id }) => {
             {firstData.genres[0].name}{" "}
           </h1>
         </div>
-        <p className="w-[64%] mb-[20px] font-bold text-16 text-[#707A94]">
+        <p className="w-[80%] mb-[20px] font-bold text-16 text-[#707A94]">
           {firstData.overview}
         </p>
         <div className="flex gap-5 items-center">

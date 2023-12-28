@@ -20,7 +20,7 @@ const ScrollableCard = ({ movies, name }) => {
     element.scrollLeft -= screenWidth - 400;
   };
 
-  const filteredMovies = movies.filter((movie) => movie.poster_path !== null);
+  const filteredMovies = movies && movies.filter((movie) => movie.poster_path !== null);
 
   return (
     <div

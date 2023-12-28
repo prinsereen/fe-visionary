@@ -114,23 +114,18 @@ const SearchPage = () => {
                 />
               </div>
             ))}
-          {search === "" && popular.map((movie, index) => (
-            <div key={index}>
-              <img
-                src={IMAGE_BASE_URL + movie.poster_path}
-                className="hover:border-2 cursor-pointer"
-                loading="lazy"
-                onLoad={handleImageLoad}
-                onClick={() =>
-                  navigate(
-                    `/${
-                      movie.media_type === "movie" ? "movie" : "series"
-                    }/trailer/${movie.id}`
-                  )
-                }
-              />
-            </div>
-          ))}
+          {search === "" &&
+            popular.map((movie, index) => (
+              <div key={index}>
+                <img
+                  src={IMAGE_BASE_URL + movie.poster_path}
+                  className="hover:border-2 cursor-pointer"
+                  loading="lazy"
+                  onLoad={handleImageLoad}
+                  onClick={() => navigate(`/movie/trailer/${movie.id}`)}
+                />
+              </div>
+            ))}
         </div>
       </div>
     </div>
