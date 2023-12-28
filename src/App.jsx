@@ -1,25 +1,28 @@
 import { BrowserRouter, Routes, Navigate, Route } from "react-router-dom";
 
 import {
-  Home,
-  Film,
-  Search,
-  Video,
-  VideoPlayed,
-  Profile,
   Login,
   Register,
+  Home,
+  SearchPage,
+  Movies,
+  MovieTrailer,
+  PlayMovie,
+  Series,
+  SeriesTrailer,
+  PlaySeries,
+  Profile,
+  EditProfile,
+  NewProfile,
+  Setting,
+  ViewMore,
+  Paywall,
 } from "./pages";
+
 import { useSelector } from "react-redux";
-import EditProfile from "./pages/profile/EditProfile";
-import Setting from "./pages/setting/setting";
-import ViewMore from "./pages/ViewMore";
-import Paywall from "./pages/paywall";
-import TrailerPlayed from "./pages/TrailerPlayed";
 
 function App() {
   const isAuth = Boolean(useSelector((state) => state.token));
-  console.log(useSelector((state) => state.token));
 
   return (
     <BrowserRouter>
@@ -29,27 +32,35 @@ function App() {
         <Route path="/home" element={isAuth ? <Home /> : <Login />} />
         <Route
           path="/search"
-          element={isAuth ? <Search /> : <Navigate to="/" />}
+          element={isAuth ? <SearchPage /> : <Navigate to="/" />}
         />
         <Route
           path="/viewMore"
           element={isAuth ? <ViewMore /> : <Navigate to="/" />}
         />
         <Route
-          path="/film"
-          element={isAuth ? <Film /> : <Navigate to="/" />}
+          path="/movies"
+          element={isAuth ? <Movies /> : <Navigate to="/" />}
         />
         <Route
-          path="/video"
-          element={isAuth ? <Video /> : <Navigate to="/" />}
+          path="/series"
+          element={isAuth ? <Series /> : <Navigate to="/" />}
         />
         <Route
-          path="/videoPlayed"
-          element={isAuth  ? <VideoPlayed /> : <Navigate to="/" />}
+          path="/movie/play/:id"
+          element={isAuth ? <PlayMovie /> : <Navigate to="/" />}
         />
         <Route
-          path="/trailer"
-          element={isAuth ? <TrailerPlayed /> : <Navigate to="/" />}
+          path="/movie/trailer/:id"
+          element={isAuth ? <MovieTrailer /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/series/play/:id"
+          element={isAuth ? <PlaySeries /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/series/trailer/:id"
+          element={isAuth ? <SeriesTrailer /> : <Navigate to="/" />}
         />
         <Route
           path="/setting"
@@ -62,6 +73,10 @@ function App() {
         <Route
           path="/editProfile"
           element={isAuth ? <EditProfile /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/newProfile"
+          element={isAuth ? <NewProfile /> : <Navigate to="/" />}
         />
         <Route
           path="/paywall"

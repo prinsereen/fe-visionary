@@ -1,16 +1,18 @@
-import { useState } from "react";
-import { kseries1, kseries2, kseries3, movie1, movie2 } from "../../assets";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 import Card from "../../components/Card";
-import { slideIn } from "../../utils/motion";
-
-const movies = [movie1, movie2, kseries1, kseries2, kseries3];
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const CardSection = () => {
-  const [selectedCategory, setSelectedCategory] = useState("Popular");
+  const [selectedCategory, setSelectedCategory] = useState("popular");
   const [startIndex, setStartIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [data, setData] = useState(null);
+  const token = useSelector((state) => state.token);
+
+  const [loading, setLoading] = useState(true);
 
   const isCategorySelected = (category) => {
     return selectedCategory === category;
@@ -28,6 +30,11 @@ const CardSection = () => {
         return newIndex;
       }
     });
+
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
   };
 
   const showPreviousCards = () => {
@@ -36,9 +43,47 @@ const CardSection = () => {
       setCurrentPage(Math.ceil(newIndex / 4) + 1);
       return newIndex;
     });
+
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
   };
 
-  const visibleMovies = movies.slice(startIndex, startIndex + 4);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          `http://localhost:5000/${selectedCategory}/1`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        // console.log(response.data.results);
+        setData(response.data.results);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    // Call the fetchData function when the component mounts
+    fetchData();
+  }, [token, selectedCategory]);
+
+  if (!data) {
+    return null;
+  }
+
+  // const moviesWithPosterPath = data.filter(
+  //   (movie) => movie.poster_path !== null
+  // );
+
+  const visibleMovies = data ? data.slice(startIndex, startIndex + 4) : [];
 
   return (
     <div className="h-full flex flex-col py-10 items-center justify-center font-sans">
@@ -47,51 +92,71 @@ const CardSection = () => {
       <div className="flex relative gap-20  text-[20px] opacity-80">
         <button
           className={`w-28 ${
-            isCategorySelected("Popular")
+            isCategorySelected("popular")
               ? "opacity-100 border-b-[6px] border-[#01798E] py-5"
               : "opacity-80"
           }`}
-          onClick={() => setSelectedCategory("Popular")}
+          onClick={() => {
+            setSelectedCategory("popular");
+            setCurrentPage(1);
+            setStartIndex(0);
+          }}
         >
           Popular
         </button>
         <button
           className={`w-40 ${
-            isCategorySelected("Top Rated Movie")
+            isCategorySelected("toprated")
               ? "opacity-100 border-b-[6px] border-[#01798E] py-5"
               : "opacity-80"
           }`}
-          onClick={() => setSelectedCategory("Top Rated Movie")}
+          onClick={() => {
+            setSelectedCategory("toprated");
+            setCurrentPage(1);
+            setStartIndex(0);
+          }}
         >
           Top Rated Movie
         </button>
         <button
           className={`w-28 ${
-            isCategorySelected("Upcoming")
+            isCategorySelected("bestselling")
               ? "opacity-100 border-b-[6px] border-[#01798E] py-5"
               : "opacity-80"
           }`}
-          onClick={() => setSelectedCategory("Upcoming")}
+          onClick={() => {
+            setSelectedCategory("bestselling");
+            setCurrentPage(1);
+            setStartIndex(0);
+          }}
         >
-          Upcoming
+          Best Selling
         </button>
         <button
           className={`w-36 ${
-            isCategorySelected("New Release")
+            isCategorySelected("latest")
               ? "opacity-100 border-b-[6px] border-[#01798E] py-5"
               : "opacity-80"
           }`}
-          onClick={() => setSelectedCategory("New Release")}
+          onClick={() => {
+            setSelectedCategory("latest");
+            setCurrentPage(1);
+            setStartIndex(0);
+          }}
         >
           New Release
         </button>
         <button
           className={`w-40 ${
-            isCategorySelected("Blast from Past")
+            isCategorySelected("oldest")
               ? "opacity-100 border-b-[6px] border-[#01798E] py-5 "
               : "opacity-80"
           }`}
-          onClick={() => setSelectedCategory("Blast from Past")}
+          onClick={() => {
+            setSelectedCategory("oldest");
+            setCurrentPage(1);
+            setStartIndex(0);
+          }}
         >
           Blast from Past
         </button>
@@ -100,20 +165,27 @@ const CardSection = () => {
       <div className=" flex items-center justify-center gap-5 mt-10 w-full relative ">
         <div className=" flex   justify-center">
           <ChevronLeft
-            className="h-16 w-16 opacity-50 cursor-pointer "
+            className="h-16 w-16 opacity-50 cursor-pointer absolute top-[45%] left-[8%] "
             onClick={showPreviousCards}
           />
         </div>
-        <div className="overflow-x-auto gap-5  flex ">
-          {visibleMovies.map((movie, index) => (
-            <motion.div key={index} variants={slideIn("left","spring" , 0.5, 0.7)}>
-              <Card name={movie} />
-            </motion.div>
-          ))}
-        </div>
+        {loading ? (
+          <div className="h-[50vh] w-[50%] flex items-center justify-center">
+            <Loader2 className="animate-spin " />
+          </div>
+        ) : (
+          <div className="overflow-x-auto gap-5 flex ">
+            {visibleMovies.map((movie, index) => (
+              <motion.div key={index}>
+                <Card movie={movie} />
+              </motion.div>
+            ))}
+          </div>
+        )}
+
         <div className="flex justify-center">
           <ChevronRight
-            className="h-16 w-16 opacity-50 cursor-pointer "
+            className="h-16 w-16 opacity-50 cursor-pointer absolute top-[45%] right-[8%]"
             onClick={showNextCards}
           />
         </div>

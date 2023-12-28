@@ -166,7 +166,7 @@ const Register = () => {
         <div className="flex justify-start items-start mt-2 w-[50%]">
           <div className="text-white text ">
             Anda sudah memiliki akun?{" "}
-            <Link to="/login" className="text-[#316A8E]">
+            <Link to="/" className="text-[#316A8E]">
               Masuk
             </Link>
           </div>

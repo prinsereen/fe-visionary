@@ -60,42 +60,77 @@ $progress-position: -2.5em;
    of the button is the center, but there is trend towards moving it to a corner
    where it gets out of the way of valuable content in the poster image.*/
 
-.vjs-default-skin .vjs-big-play-button {
-  /* The font size is what makes the big play button...big. 
-     All width/height values use ems, which are a multiple of the font size.
-     If the .video-js font-size is 10px, then 3em equals 30px.*/
-  font-size: 4em;
-  /* We're using SCSS vars here because the values are used in multiple places.
-     Now that font size is set, the following em values will be a multiple of the
-     new font size. If the font-size is 3em (30px), then setting any of
-     the following values to 3em would equal 30px. 3 * font-size. */
-  $big-play-width: 1.5em;
-  /* 1.5em = 45px default */
-  $big-play-height: 1.5em;
-  line-height: $big-play-height;
-  height: $big-play-height;
-  width: $big-play-width;
-  /* 0.06666em = 2px default */
-  border: 0.06666em solid $secondary-foreground-color;
-  /* 0.3em = 9px default */
-  border-radius: 50%;
-  @if $big-play-button {
-    display: block;
-  } @else {
+   .video-js .vjs-big-play-button .vjs-icon-placeholder:before {
+    content: "";
+    background-color: transparent !important;
+    background-image: url('../assets/big-play-button.png');
+    background-repeat: no-repeat;
+    background-size: 300px;
+    background-position: 55% calc(50% - 0px);
+    border: none !important;
+    box-shadow: none !important;
+ }
+
+ .vjs-big-play-button {
+  background-color: transparent !important;
+  width: 200px !important;
+  height: 200px !important;
+  top: 44% !important;
+  left: 46% !important ;
+  right: 0;
+  bottom: 0;
+  // background-image: url('myimage.png');
+  background-repeat: no-repeat;
+  background-size: 200px;
+  background-position: 50% calc(50% - 10px);
+  border: none !important; // @stylint ignore
+  box-shadow: none !important; // @stylint ignore
+  &:before {
+    content: "";
     display: none;
   }
-  @if $center-big-play-button {
-    /* Align center */
-    left: 50%;
-    top: 40%;
-    margin-left:calc($big-play-width / 2);
-    margin-top: calc($big-play-width / 2);
-  } @else {
-    /* Align top left. 0.5em = 15px default */
-    left: 0.5em;
-    top: 0.5em;
+  &:hover {
+    background-color: transparent;
+    opacity: .7;
   }
 }
+
+// .vjs-default-skin .vjs-big-play-button {
+//   /* The font size is what makes the big play button...big. 
+//      All width/height values use ems, which are a multiple of the font size.
+//      If the .video-js font-size is 10px, then 3em equals 30px.*/
+//   font-size: 4em;
+//   /* We're using SCSS vars here because the values are used in multiple places.
+//      Now that font size is set, the following em values will be a multiple of the
+//      new font size. If the font-size is 3em (30px), then setting any of
+//      the following values to 3em would equal 30px. 3 * font-size. */
+//   $big-play-width: 1.5em;
+//   /* 1.5em = 45px default */
+//   $big-play-height: 1.5em;
+//   line-height: $big-play-height;
+//   height: $big-play-height;
+//   width: $big-play-width;
+//   /* 0.06666em = 2px default */
+//   border: 0.06666em solid #01798E;
+//   /* 0.3em = 9px default */
+//   border-radius: 100%;
+//   @if $big-play-button {
+//     display: block;
+//   } @else {
+//     display: none;
+//   }
+//   @if $center-big-play-button {
+//     /* Align center */
+//     left: 50%;
+//     top: 40%;
+//     margin-left:calc($big-play-width / 2);
+//     margin-top: calc($big-play-width / 2);
+//   } @else {
+//     /* Align top left. 0.5em = 15px default */
+//     left: 0.5em;
+//     top: 0.5em;
+//   }
+// }
 
 .video-js .vjs-play-control,
 .video-js .vjs-remaining-time,
@@ -153,7 +188,7 @@ $progress-position: -2.5em;
 }
 
 .video-js .vjs-control-bar,
-.video-js .vjs-big-play-button,
+// .video-js .vjs-big-play-button,
 .video-js .vjs-menu-button .vjs-menu-content {
   /* IE8 - has no alpha support */
   background-color: $primary-background-color;

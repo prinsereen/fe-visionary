@@ -11,7 +11,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
-  
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,7 +35,7 @@ const Login = () => {
           })
         );
       }
-      navigate("/home");
+      navigate("/editProfile");
     } catch (error) {
       setLoginError(error.response.data.msg);
     }
@@ -84,35 +83,6 @@ const Login = () => {
                 Daftar Sekarang
               </Link>
             </div>
-          </div>
-
-          <div className="flex items-center justify-center w-full mb-[40px]">
-            <hr className="bg-white text-white w-full" />
-            <p className="text-white mx-3">Or</p>
-            <hr className="bg-white text-white w-full" />
-          </div>
-          <div className="flex items-center justify-between text-black">
-            <button className="bg-white py-2 px-4 rounded w-[120px]">
-              <img
-                src="src/assets/logo/google-logo.png"
-                alt=""
-                className="mx-auto"
-              />
-            </button>
-            <button className="bg-white py-2 px-4 rounded w-[120px]">
-              <img
-                src="src/assets/logo/facebook-logo.png"
-                alt=""
-                className="mx-auto"
-              />
-            </button>
-            <button className="bg-white py-2 px-4 rounded w-[120px]">
-              <img
-                src="src/assets/logo/apple-logo.png"
-                alt=""
-                className="mx-auto"
-              />
-            </button>
           </div>
         </form>
       </div>

@@ -1,6 +1,12 @@
 import { Laptop2 } from "lucide-react";
+import { setLogout } from "../../state";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const Device = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   return (
     <div className="flex flex-col w-full p-20 ">
       <div className="flex w-full justify-between mb-20  items-center">
@@ -21,7 +27,15 @@ const Device = () => {
               </h2>
             </div>
           </div>
-          <button className="text-24 font-bold bg-[#2A2626] px-10 py-2 rounded-[25px]">Keluar</button>
+          <button
+            className="text-24 font-bold bg-[#2A2626] px-10 py-2 rounded-[25px] hover:bg-zinc-600"
+            onClick={() => {
+              dispatch(setLogout());
+              navigate("/");
+            }}
+          >
+            Keluar
+          </button>
         </div>
       </div>
     </div>
