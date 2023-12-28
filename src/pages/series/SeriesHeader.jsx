@@ -4,6 +4,7 @@ import { tonton } from "../../assets";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import getEnglishNameByCode from "../../utils/languages";
 
 // eslint-disable-next-line react/prop-types
 const SeriesHeader = ({ id }) => {
@@ -36,6 +37,9 @@ const SeriesHeader = ({ id }) => {
   if (!firstData) {
     return null;
   }
+
+  const language = firstData 
+  && getEnglishNameByCode(firstData.original_language);
 
   const formattedDate = new Date(firstData.first_air_date).toLocaleDateString(
     "en-US",
@@ -85,9 +89,7 @@ const SeriesHeader = ({ id }) => {
                   : firstData.last_episode_to_air.runtime}{" "}m</h1>
           <Dot />
           <h1 className="text-16 font-semibold ">
-            {firstData.spoken_languages &&
-              firstData.spoken_languages[0] &&
-              firstData.spoken_languages[0].english_name}
+            {language}
           </h1>
           <Dot />
           <h1 className="text-16 font-semibold ">
