@@ -66,29 +66,26 @@ const EpisodeDetail = ({ id, season, episode }) => {
   const overview = limitWords(data.overview, 48);
 
   return (
-    <div className="flex gap-5 relative cursor-pointer" onClick={handleOnClick}>
-      {data.still_path ? (
-        <img
-          src={IMAGE_BASE_URL + data.still_path}
-          alt={`${specials ? "Special" : `S${season}`} E${episode}`}
-          className="w-[20%]  rounded-md text-center "
-        />
-      ) : (
-        <div className=" w-[20%] h-[120px] border-[1px] flex items-center justify-center ">
-          {`${specials ? "Special" : `S${season}`} E${episode}`}
+    <div className="cursor-pointer" onClick={handleOnClick}>
+      {data.still_path && (
+        <div className="flex gap-5">
+          <img
+            src={IMAGE_BASE_URL + data.still_path}
+            alt={`${specials ? "Special" : `S${season}`} E${episode}`}
+            className="w-[20%]  rounded-md text-center "
+          />
+          <div className="flex flex-col justify-center cursor-pointer">
+            <div className="flex font-semibold">
+              <h1>{`${specials ? "Special" : `S${season}`} E${episode}`}</h1>
+              <Dot />
+              <h1>{formattedDate}</h1>
+              <Dot />
+              <h1>{data.runtime ? `${data.runtime}m` : "N/A"}</h1>
+            </div>
+            <h1 className="text-[#9E9EA0] w-[35%]">{overview}</h1>
+          </div>
         </div>
       )}
-      <div className="flex flex-col justify-center cursor-pointer">
-        <h1></h1>
-        <div className="flex font-semibold">
-          <h1>{`${specials ? "Special" : `S${season}`} E${episode}`}</h1>
-          <Dot />
-          <h1>{formattedDate}</h1>
-          <Dot />
-          <h1>{data.runtime ? `${data.runtime}m` : "N/A"}</h1>
-        </div>
-        <h1 className="text-[#9E9EA0] w-[35%]">{overview}</h1>
-      </div>
     </div>
   );
 };

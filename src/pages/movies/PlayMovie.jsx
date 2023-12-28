@@ -107,7 +107,7 @@ const PlayMovie = () => {
               <h1 className="text-16 font-semibold ">
                 {data.release_dates &&
                   data.release_dates.release_dates &&
-                  data.release_dates.release_dates[0]?.certification}
+                  data.release_dates.release_dates[0]?.certification || "N/A"}
               </h1>
               <Dot />
               <h1 className="text-16 font-semibold ">{data.genres[0].name}</h1>

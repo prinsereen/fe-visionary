@@ -184,7 +184,7 @@ const SeriesTrailer = () => {
             className="youtube-container"
           />
           <div className="absolute bottom-0 px-5 pl-32 w-full bg-gradient-to-t from-[#0F1014]">
-            <h1 className="font-bold text-32 overflow-hidden overflow-ellipsis max-w-[30%] mb-2">
+            <h1 className="font-bold text-32 overflow-hidden overflow-ellipsis max-w-[40%] mb-2">
               {data.name}
             </h1>
             <div className="flex w-full items-center mb-4">
