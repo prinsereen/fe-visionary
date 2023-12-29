@@ -213,7 +213,7 @@ const SeriesTrailer = () => {
               <h1 className="text-16 font-semibold ">{data.genres[0].name}</h1>
             </div>
 
-            <p className="text-16 w-[30%] mb-3 text-[#A1A2A2]">{overview}</p>
+            <p className="text-16 w-[40%] mb-3 text-[#A1A2A2]">{overview}</p>
 
             <div className="flex justify-between items-center gap-4 py-3">
               <div className="flex gap-5 py-3">
