@@ -12,13 +12,18 @@ const Paywall = () => {
   const navigate = useNavigate();
 
   const handleSubscribe = async () => {
+    const data = { jenis_pengguna: "subscribed" };
     try {
       setLoading(true);
-      const response = await axios.patch("http://localhost:5000/subscribe", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.patch(
+        "http://localhost:5000/subscribe",
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       if (response) {
         navigate("/home");
       }
