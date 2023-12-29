@@ -86,7 +86,7 @@ const PlayMovie = () => {
   return (
     <div className="w-full h-full flex overflow-x-hidden bg-black">
       <Navbar />
-      <div className="w-[100vw] text-white pr-0  gap-1 pl-24 flex flex-col ">
+      <div className="w-[100vw] text-white pr-0  gap-1 pl-[8%] flex flex-col ">
         <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
         {/* <VideoPlayer options={videoJsOptions} onReady={handlePlayerReady} /> */}
 
