@@ -80,6 +80,7 @@ const MovieTrailer = () => {
             Authorization: `Bearer ${token}`,
           },
         });
+        // console.log(response.data.release_dates)
         setData(response.data);
 
         if (response.data.videos.results) {
@@ -181,7 +182,7 @@ const MovieTrailer = () => {
             className="youtube-container"
           />
           <div className="absolute bottom-0 p-5 pl-32 w-full bg-gradient-to-t from-[#0F1014] ">
-            <h1 className="font-bold text-32 overflow-hidden overflow-ellipsis max-w-[40%] mb-2">
+            <h1 className="font-bold text-32 overflow-hidden overflow-ellipsis max-w-[34%] mb-2">
               {data.title}
             </h1>
             <div className="flex w-full items-center mb-4">
@@ -192,10 +193,9 @@ const MovieTrailer = () => {
               <h1 className="text-16 font-semibold ">{language}</h1>
               <Dot />
               <h1 className="text-16 font-semibold ">
-                {(data.release_dates &&
+                {data.release_dates &&
                   data.release_dates.release_dates &&
-                  data.release_dates.release_dates[0]?.certification) ||
-                  "N/A"}
+                  data.release_dates.release_dates[0].certification || "N/A"}
               </h1>
               <Dot />
               <h1 className="text-16 font-semibold ">{data.genres[0].name}</h1>
